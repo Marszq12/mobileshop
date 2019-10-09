@@ -1,4 +1,4 @@
-package com.zq;
+package com.zq.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.zq.R;
 
 public class NavigationFragment extends Fragment {
 
