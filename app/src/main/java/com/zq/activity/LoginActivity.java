@@ -7,6 +7,7 @@ import android.widget.EditText;
 
 import com.google.gson.Gson;
 import com.zq.R;
+import com.zq.bean.LoginResponse;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -14,6 +15,8 @@ import java.util.concurrent.TimeUnit;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -34,27 +37,37 @@ public class LoginActivity extends AppCompatActivity {
     void login() {
 
         final String username = et_username.getText().toString();
-        final String pwd = et_pwd.getText().toString();
-
-        new Thread() {
+        final  String pwd =et_pwd.getText().toString();
+        new Thread(){
             @Override
             public void run() {
                 super.run();
-                OkHttpClient httpClient=new OkHttpClient.Builder().readTimeout(1, TimeUnit.SECONDS).build();
-                String url="http://192.168.192.1：8080/MobileShop/member/login2";
-                FormBody body=new FormBody.Builder().add("input",username).add("password",pwd).build();
+                String url="http://192.168.192.1:8080/MobileShop/member/login2";
+                OkHttpClient httpClient = new OkHttpClient.Builder().readTimeout(1, TimeUnit.SECONDS).build();
+                FormBody body = new FormBody.Builder()
+                        .add("input", username)
+                        .add("password", pwd).build();
                 Request request=new Request.Builder()
                         .url(url)
                         .post(body)
                         .build();
+      /* httpClient.newCall(request).enqueue(new Callback() {
+           @Override
+           public void onFailure(Call call, IOException e) {
+
+           }
+
+           @Override
+           public void onResponse(Call call, Response response) throws IOException {
+
+           }
+       });*/
                 try {
-                    Response response=httpClient.newCall(request).execute();
+                    Response response = httpClient.newCall(request).execute();
                     String string=response.body().string();
-
                     Gson gson=new Gson();
-                    gson.fromJson(string,)
-
-                }catch (IOException e){
+                    LoginResponse loginResponse= gson.fromJson(string, LoginResponse.class);
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }

@@ -1,5 +1,5 @@
 package com.zq.activity.bean;
 
-public class LoginResponse {
+public class Response {
 
 }
