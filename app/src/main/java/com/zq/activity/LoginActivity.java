@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.zq.R;
@@ -66,7 +67,25 @@ public class LoginActivity extends AppCompatActivity {
                     Response response = httpClient.newCall(request).execute();
                     String string=response.body().string();
                     Gson gson=new Gson();
-                    LoginResponse loginResponse= gson.fromJson(string, LoginResponse.class);
+                   final   LoginResponse loginResponse= gson.fromJson(string, LoginResponse.class);
+
+                    if (loginResponse.getStatus()==0){
+                        runOnUiThread(new Runnable() {
+                            @Override
+                                public void run(){
+                                    Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
+                                }
+
+                        });finish();
+                    }else{
+                        runOnUiThread(new Runnable() {
+                            @Override
+                                public void run(){
+                                    Toast.makeText(LoginActivity.this,loginResponse.getMsg(),Toast.LENGTH_SHORT).show();
+                                }
+
+                        });
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
