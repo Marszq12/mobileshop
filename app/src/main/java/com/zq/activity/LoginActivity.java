@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.zq.R;
 import com.zq.bean.LoginResponse;
+import com.zq.fragment.SpTool;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -34,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
     }
-    @OnClick(R.id.bt_log)
+    @OnClick(R.id.bt_login)
     void login() {
 
         final String username = et_username.getText().toString();
@@ -43,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void run() {
                 super.run();
-                String url="http://192.168.192.1:8080/MobileShop/member/login2";
+                String url="http://10.105.252.98:8080/MobileShop/member/login2";
                 OkHttpClient httpClient = new OkHttpClient.Builder().readTimeout(1, TimeUnit.SECONDS).build();
                 FormBody body = new FormBody.Builder()
                         .add("input", username)
@@ -70,6 +71,9 @@ public class LoginActivity extends AppCompatActivity {
                    final   LoginResponse loginResponse= gson.fromJson(string, LoginResponse.class);
 
                     if (loginResponse.getStatus()==0){
+
+                        SpTool.setBoolean("isLogin",true);
+
                         runOnUiThread(new Runnable() {
                             @Override
                                 public void run(){
@@ -83,7 +87,6 @@ public class LoginActivity extends AppCompatActivity {
                                 public void run(){
                                     Toast.makeText(LoginActivity.this,loginResponse.getMsg(),Toast.LENGTH_SHORT).show();
                                 }
-
                         });
                     }
                 } catch (IOException e) {

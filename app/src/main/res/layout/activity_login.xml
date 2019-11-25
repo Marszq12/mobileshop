@@ -75,7 +75,7 @@
         android:layout_weight="1"/>
 </LinearLayout>
 <Button
-    android:id="@+id/bt_log"
+    android:id="@+id/bt_login"
     android:background="#e31"
     android:text="登录"
     android:textSize="17sp"

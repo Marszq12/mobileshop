@@ -5,64 +5,81 @@ import android.content.SharedPreferences;
 
 import com.zq.MyApp;
 
-public class SpTool {
- private final static String SPNAME="my_sp" ;
-    public static void putString(String key, String value){
-        SharedPreferences sp = MyApp.app.getSharedPreferences(SPNAME, Context.MODE_PRIVATE);
-        sp.edit().putString(key, value).commit();
-    }
 
-    public static String getString(String key, String deValue){
-        SharedPreferences sp =MyApp.app.getSharedPreferences();
-       return sp.getString(key,deValue);
-    }
+/**
+ * SharedPreferences工具类
+ */
+public class SpTool{
+    private static final String CONFIGFILE = "fc_sp_name";
 
-    public static void putLong(String key,long value){
-
-        SharedPreferences sp= MyApp.app.getSharedPreferences(SPNAME,Context.MODE_PRIVATE);
-        sp.edit().putLong(key, value).commit();
+    /**
+     * @param key   关键字
+     * @param value 对应的值
+     */
+    public static void setBoolean(String key, boolean value) {
+        SharedPreferences sp = MyApp.app.getSharedPreferences(CONFIGFILE, Context.MODE_PRIVATE);
+        sp.edit().putBoolean(key, value).commit();//提交保存键值对
 
     }
-    public static Long setLong(String key,long deValue){
-        SharedPreferences sharedPreferences =MyApp.app.getSharedPreferences();
-        return sharedPreferences.getLong(key,deValue);
-    }
-    public static void setBoolean(String key,boolean value){
-        SharedPreferences sp= MyApp.app.getSharedPreferences(SPNAME,Context.MODE_PRIVATE);
-        sp.edit().putBoolean(key, value).commit();
-    }
-    public static Boolean getBoolean(String key,boolean deValue){
-        SharedPreferences sp = MyApp.app.getSharedPreferences(SPNAME,Context.MODE_PRIVATE);
-        return sp.getBoolean(key,deValue);
-    }
-    public static void putFloat(String key,float value){
-        SharedPreferences.Editor edit=getEdit();
-        edit.putFloat(key,value);
-        edit.apply();
-    }
-    public static Float getFloat(String key,float deValue){
-        SharedPreferences sharedPreferences = MyApp.app.getSharedPreferences();
-        return sharedPreferences.getFloat(key,deValue);
-    }
-    public static void setInt(String key,int value){
-        SharedPreferences sp = MyApp.app.getSharedPreferences(SPNAME,Context.MODE_PRIVATE);
-        sp.edit().putInt(key, value).commit();
-    }
-    public static Integer getInt(String key,int deValue){
-        SharedPreferences sp = MyApp.app.getSharedPreferences(SPNAME,Context.MODE_PRIVATE);
-        return sp.getInt(key, deValue);
+
+    /**
+     * @param key      关键字
+     * @param defValue 设置的默认值
+     * @return
+     */
+    public static boolean getBoolean(String key, boolean defValue) {
+        SharedPreferences sp = MyApp.app.getSharedPreferences(CONFIGFILE, Context.MODE_PRIVATE);
+        return sp.getBoolean(key, defValue);
     }
 
-    public static SharedPreferences getSharedPreferences(){
-        SharedPreferences my_sp =MyApp.getContext().getSharedPreferences(SPNAME,Context.MODE_PRIVATE);
-        return my_sp;
+    /**
+     * @param key   关键字
+     * @param value 对应的值
+     */
+    public static void setString(String key, String value) {
+        SharedPreferences sp = MyApp.app.getSharedPreferences(CONFIGFILE, Context.MODE_PRIVATE);
+        sp.edit().putString(key, value).commit();//提交保存键值对
+
     }
 
+    /**
+     * @param key      关键字
+     * @param defValue 设置的默认值
+     * @return
+     */
+    public static String getString(String key, String defValue) {
+        SharedPreferences sp = MyApp.app.getSharedPreferences(CONFIGFILE, Context.MODE_PRIVATE);
+        return sp.getString(key, defValue);
+    }
 
+    /**
+     * @param key   关键字
+     * @param value 对应的值
+     */
+    public static void setInt(String key, int value) {
+        SharedPreferences sp = MyApp.app.getSharedPreferences(CONFIGFILE, Context.MODE_PRIVATE);
+        sp.edit().putInt(key, value).commit();//提交保存键值对
 
-    public static SharedPreferences.Editor getEdit(){
-        SharedPreferences my_sp =getSharedPreferences();
-        SharedPreferences.Editor edit=my_sp.edit();
-        return edit;
+    }
+
+    /**
+     * @param key      关键字
+     * @param defValue 设置的默认值
+     * @return
+     */
+    public static int getInt(String key, int defValue) {
+        SharedPreferences sp = MyApp.app.getSharedPreferences(CONFIGFILE, Context.MODE_PRIVATE);
+        return sp.getInt(key, defValue);
+    }
+
+    public static void setLong(String key, long value) {
+        SharedPreferences sp = MyApp.app.getSharedPreferences(CONFIGFILE, Context.MODE_PRIVATE);
+        sp.edit().putLong(key, value).commit();//提交保存键值对
+
+    }
+
+    public static long getLong(String key, long defValue) {
+        SharedPreferences sp = MyApp.app.getSharedPreferences(CONFIGFILE, Context.MODE_PRIVATE);
+        return sp.getLong(key, defValue);
     }
 }
